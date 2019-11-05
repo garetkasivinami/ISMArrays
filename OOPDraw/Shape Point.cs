@@ -9,11 +9,13 @@ namespace OOPDraw
 {
     public abstract class ShapePoint
     {
-        public Color color; // щоб не співпадало з назвою структури
-        public ShapePoint(Color color)
+        public Color Color;
+        public Point MainPoint;
+        public ShapePoint(Color color, Point mainPoint)
         {
-            this.color = color;
+            this.Color = color;
+            MainPoint = mainPoint;
         }
-        public abstract void Draw(Graphics graphics, Pen pen);
+        public abstract void Draw(Graphics graphics);
     }
 }

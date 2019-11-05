@@ -4,20 +4,13 @@ namespace OOPDraw
 {
     public class DrawRectangle : DrawLine
     {
-        public DrawRectangle(Color color, Point firstPoint, Point Scale) : base(color, firstPoint, Scale)
+        public DrawRectangle(Color color, Point firstPoint, Point Scale, float width) : base(color, firstPoint, Scale, width)
         {
 
         }
-        public override void Draw(Graphics graphics, Pen pen)
+        public override void Draw(Graphics graphics)
         {
-            /*
-            graphics.DrawLine(pen, mainPoint.X, mainPoint.Y, SecondPoint.X, mainPoint.Y);
-            graphics.DrawLine(pen, mainPoint.X, mainPoint.Y, mainPoint.X, SecondPoint.Y);
-            graphics.DrawLine(pen, mainPoint.X, SecondPoint.Y, SecondPoint.X, SecondPoint.Y);
-            graphics.DrawLine(pen, SecondPoint.X, mainPoint.Y, SecondPoint.X, SecondPoint.Y);
-            */
-
-            graphics.DrawRectangle(pen, mainPoint.X, mainPoint.Y, SecondPoint.X, SecondPoint.Y);
+            graphics.DrawRectangle(new Pen(Color,Width), MainPoint.X, MainPoint.Y, SecondPoint.X, SecondPoint.Y);
         }
     }
 }

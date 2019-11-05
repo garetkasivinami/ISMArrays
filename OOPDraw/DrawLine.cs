@@ -5,13 +5,13 @@ namespace OOPDraw
     public class DrawLine : DrawPoint
     {
         public Point SecondPoint;
-        public DrawLine(Color color, Point firstPoint, Point secondPoint) : base(color, firstPoint)
+        public DrawLine(Color color, Point firstPoint, Point secondPoint, float width) : base(color, firstPoint, width)
         {
             SecondPoint = secondPoint;
         }
-        public override void Draw(Graphics graphics, Pen pen)
+        public override void Draw(Graphics graphics)
         {
-            graphics.DrawLine(pen, mainPoint, SecondPoint);
+            graphics.DrawLine(new Pen(Color,Width), MainPoint, SecondPoint);
         }
     }
 }

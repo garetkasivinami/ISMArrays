@@ -40,54 +40,23 @@ namespace OOPDraw
                 switch (random.Next(0, 4))
                 {
                     case 0:
-                        shapePoints[i] = new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(20, 100), random.Next(20, 100)));
+                        shapePoints[i] = new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(20, 100), random.Next(20, 100)), pen.Width);
                         break;
                     case 1:
-                        shapePoints[i] = new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)));
+                        shapePoints[i] = new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), pen.Width);
                         break;
                     case 2:
-                        shapePoints[i] = new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, 75));
+                        shapePoints[i] = new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, 75), pen.Width);
                         break;
                     case 3:
-                        shapePoints[i] = new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, 75), random.Next(15, 75)));
+                        shapePoints[i] = new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, 75), random.Next(15, 75)), pen.Width);
                         break;
                 }
-                shapePoints[i].Draw(graphics, pen);
+                shapePoints[i].Draw(graphics);
             }
             //Thread.Sleep(100);
             GC.Collect();
         }
-        public void StartNarkomania()
-        {
-            while (true)
-            {
-                graphics.Clear(Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256)));
-                shapePoints = new ShapePoint[200];
-                for (int i = 0; i < 200; i++)
-                {
-                    pen.Color = Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
-                    switch (random.Next(0, 4))
-                    {
-                        case 0:
-                            shapePoints[i] = new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(20, 100), random.Next(20, 100)));
-                            break;
-                        case 1:
-                            shapePoints[i] = new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)));
-                            break;
-                        case 2:
-                            shapePoints[i] = new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, 75));
-                            break;
-                        case 3:
-                            shapePoints[i] = new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, 75), random.Next(15, 75)));
-                            break;
-                    }
-                    shapePoints[i].Draw(graphics, pen);
-                }
-                //Thread.Sleep(100);
-                GC.Collect();
-            }
-        }
-
         private void ClearButton_Click(object sender, EventArgs e)
         {
             graphics.Clear(Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256)));

@@ -9,18 +9,20 @@ namespace OOPDraw
 {
     class DrawCircle : DrawPoint
     {
-        public Point scale;
-        public DrawCircle(Color color, Point mainPoint, int radius) : base (color, mainPoint)
+        public int ScaleX;
+        public DrawCircle(Color color, Point mainPoint, int radius, float width) : base (color, mainPoint, width)
         {
-            scale.X = radius;
-            scale.Y = radius;
+            ScaleX = radius;
         }
-        public DrawCircle(Color color, Point mainPoint) : base(color, mainPoint)
+        public DrawCircle(Color color, Point mainPoint) : base(color, mainPoint, 0)
         {
         }
-        public override void Draw(Graphics graphics, Pen pen)
+        public DrawCircle(Color color, Point mainPoint, float width) : base(color, mainPoint, width)
         {
-            graphics.DrawEllipse(pen,mainPoint.X, mainPoint.Y, scale.X, scale.Y);
+        }
+        public override void Draw(Graphics graphics)
+        {
+            graphics.DrawEllipse(new Pen(Color,Width),MainPoint.X, MainPoint.Y, ScaleX, ScaleX);
         }
     }
 }

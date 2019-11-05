@@ -9,14 +9,14 @@ namespace OOPDraw
 {
     public class DrawPoint : ShapePoint
     {
-        public Point mainPoint;
-        public DrawPoint(Color color, Point point) : base(color)
+        public float Width;
+        public DrawPoint(Color color, Point point, float width) : base(color, point)
         {
-            mainPoint = point;
+            Width = width;
         }
-        public override void Draw(Graphics graphics, Pen pen)
+        public override void Draw(Graphics graphics)
         {
-            graphics.DrawEllipse(pen, mainPoint.X, mainPoint.Y, 3, 3);
+            graphics.DrawEllipse(new Pen(Color,Width), MainPoint.X, MainPoint.Y, 3, 3);
         }
     }
 }
