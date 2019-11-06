@@ -10,7 +10,7 @@ namespace OOPDraw
         }
         public override void Draw(Graphics graphics)
         {
-            graphics.DrawRectangle(new Pen(Color,Width), MainPoint.X, MainPoint.Y, SecondPoint.X, SecondPoint.Y);
+            graphics.DrawRectangle(Pen, MainPoint.X - SecondPoint.X / 2, MainPoint.Y - SecondPoint.Y, SecondPoint.X, SecondPoint.Y);
         }
     }
 }

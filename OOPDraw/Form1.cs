@@ -16,50 +16,68 @@ namespace OOPDraw
         public static Random random;
         private Graphics graphics;
         private Pen pen;
-        public ShapePoint[] shapePoints;
+        public ShapePoint[] ShapePoints;
         public Form1()
         {
             InitializeComponent();
             random = new Random();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             graphics = DrawBox.CreateGraphics();
-            pen = new Pen(Color.Red , 2);
-            //new Thread(StartNarkomania).Start();
+            pen = new Pen(Color.Red, 2);
+            graphics.Clear(Color.White); // не працює
         }
 
         private void CreateDraw_Click(object sender, EventArgs e)
         {
-            shapePoints = new ShapePoint[200];
-            for (int i = 0; i < 200; i++)
+            ShapePoints = new ShapePoint[3];
+
+            for (int i = 0; i < ShapePoints.Length; i++)
             {
                 pen.Color = Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
                 switch (random.Next(0, 4))
                 {
                     case 0:
-                        shapePoints[i] = new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(20, 100), random.Next(20, 100)), pen.Width);
+                        ShapePoints[i] = new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(10, 50), random.Next(10, 50)), pen.Width);
                         break;
                     case 1:
-                        shapePoints[i] = new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), pen.Width);
+                        ShapePoints[i] = new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), pen.Width);
                         break;
                     case 2:
-                        shapePoints[i] = new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, 75), pen.Width);
+                        ShapePoints[i] = new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, 75), pen.Width);
                         break;
                     case 3:
-                        shapePoints[i] = new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, 75), random.Next(15, 75)), pen.Width);
+                        ShapePoints[i] = new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, 75), random.Next(15, 75)), pen.Width);
                         break;
                 }
-                shapePoints[i].Draw(graphics);
             }
-            //Thread.Sleep(100);
             GC.Collect();
+            Draw(); // DrawBox>Reflesh() не працює як потрібно 
         }
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            graphics.Clear(Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256)));
+            graphics.Clear(Color.White);
+            ShapePoints = null;
+        }
+
+        private void DrawBox_Paint(object sender, PaintEventArgs e)
+        {
+            Draw();   
+        }
+        // костиль
+        public void Draw()
+        {
+            graphics.Clear(Color.White);
+            if (ShapePoints != null)
+            {
+                for (int i = 0; i < ShapePoints.Length; i++)
+                {
+                    ShapePoints[i].Draw(graphics);
+                }
+            }
         }
     }
 }

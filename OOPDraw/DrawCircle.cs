@@ -22,7 +22,7 @@ namespace OOPDraw
         }
         public override void Draw(Graphics graphics)
         {
-            graphics.DrawEllipse(new Pen(Color,Width),MainPoint.X, MainPoint.Y, ScaleX, ScaleX);
+            graphics.DrawEllipse(Pen,MainPoint.X - ScaleX / 2, MainPoint.Y - ScaleX / 2, ScaleX, ScaleX);
         }
     }
 }

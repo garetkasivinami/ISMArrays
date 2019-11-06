@@ -11,7 +11,7 @@ namespace OOPDraw
         }
         public override void Draw(Graphics graphics)
         {
-            graphics.DrawLine(new Pen(Color,Width), MainPoint, SecondPoint);
+            graphics.DrawLine(Pen, MainPoint, SecondPoint);
         }
     }
 }

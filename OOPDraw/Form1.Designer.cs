@@ -46,11 +46,12 @@
             // 
             // DrawBox
             // 
-            this.DrawBox.Location = new System.Drawing.Point(0, 3);
+            this.DrawBox.Location = new System.Drawing.Point(12, 3);
             this.DrawBox.Name = "DrawBox";
             this.DrawBox.Size = new System.Drawing.Size(1081, 597);
             this.DrawBox.TabIndex = 0;
             this.DrawBox.TabStop = false;
+            this.DrawBox.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawBox_Paint);
             // 
             // ClearButton
             // 
