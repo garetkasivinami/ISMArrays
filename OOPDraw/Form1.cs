@@ -55,7 +55,7 @@ namespace OOPDraw
                         break;
                 }
             }
-            Draw(); // DrawBox>Reflesh() не працює як потрібно 
+            DrawBox.Refresh();
         }
         private void ClearButton_Click(object sender, EventArgs e)
         {
@@ -65,13 +65,7 @@ namespace OOPDraw
 
         private void DrawBox_Paint(object sender, PaintEventArgs e)
         {
-            Draw();   
-        }
-        // костиль
-        public void Draw()
-        {
-            graphics.Dispose();
-            graphics = DrawBox.CreateGraphics();
+            graphics = e.Graphics;
             graphics.Clear(Color.White);
             if (ShapePoints != null)
             {
@@ -81,7 +75,6 @@ namespace OOPDraw
                 }
             }
         }
-
         private void Count_Scroll(object sender, EventArgs e)
         {
             CountLabel.Text = Count.Value.ToString();

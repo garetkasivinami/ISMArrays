@@ -86,6 +86,7 @@
             // 
             // CountLabel
             // 
+            this.CountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CountLabel.AutoSize = true;
             this.CountLabel.Location = new System.Drawing.Point(926, 612);
             this.CountLabel.Name = "CountLabel";
