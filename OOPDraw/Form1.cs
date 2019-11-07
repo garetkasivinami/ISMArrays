@@ -16,8 +16,10 @@ namespace OOPDraw
         public static Random random;
         private Graphics graphics;
         private Pen pen;
-        public ShapePoint[] ShapePoints;
+        public List<ShapePoint> ShapePoints = new List<ShapePoint>();
         public Thread CleanThread;
+        private bool Drawing;
+        private DrawLine Line;
         public Form1()
         {
             InitializeComponent();
@@ -34,24 +36,24 @@ namespace OOPDraw
 
         private void CreateDraw_Click(object sender, EventArgs e)
         {
-            ShapePoints = new ShapePoint[Count.Value];
+            ShapePoints.Clear();
 
-            for (int i = 0; i < ShapePoints.Length; i++)
+            for (int i = 0; i < Count.Value; i++)
             {
                 pen.Color = Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
                 switch (random.Next(0, 4))
                 {
                     case 0:
-                        ShapePoints[i] = new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(10, 50), random.Next(10, 50)), pen.Width);
+                        ShapePoints.Add(new DrawRectangle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(10, DrawBox.Width / 2), random.Next(10, DrawBox.Height / 2)), pen.Width));
                         break;
                     case 1:
-                        ShapePoints[i] = new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), pen.Width);
+                        ShapePoints.Add(new DrawLine(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), pen.Width));
                         break;
                     case 2:
-                        ShapePoints[i] = new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, 75), pen.Width);
+                        ShapePoints.Add(new DrawCircle(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), random.Next(10, DrawBox.Width / 2), pen.Width));
                         break;
                     case 3:
-                        ShapePoints[i] = new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, 75), random.Next(15, 75)), pen.Width);
+                        ShapePoints.Add(new DrawElips(pen.Color, new Point(random.Next(0, DrawBox.Width), random.Next(0, DrawBox.Height)), new Point(random.Next(15, DrawBox.Width / 2), random.Next(15, DrawBox.Height / 2)), pen.Width));
                         break;
                 }
             }
@@ -59,17 +61,18 @@ namespace OOPDraw
         }
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            graphics.Clear(Color.White);
-            ShapePoints = null;
+            ShapePoints.Clear();
+            DrawBox.Refresh();
         }
 
         private void DrawBox_Paint(object sender, PaintEventArgs e)
         {
+            pen.Color = Color.Red;
             graphics = e.Graphics;
             graphics.Clear(Color.White);
-            if (ShapePoints != null)
+            if (ShapePoints.Count > 0)
             {
-                for (int i = 0; i < ShapePoints.Length; i++)
+                for (int i = 0; i < ShapePoints.Count; i++)
                 {
                     ShapePoints[i].Draw(graphics);
                 }
@@ -87,5 +90,28 @@ namespace OOPDraw
                 GC.Collect();
             }
         }
+        #region Малювання мишкою
+        private void DrawBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            Drawing = true;
+            Point startMousePos = new Point(e.X, e.Y);
+            Line = new DrawLine(pen.Color, startMousePos, startMousePos, pen.Width);
+            ShapePoints.Add(Line);
+        }
+
+        private void DrawBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Drawing)
+            {
+                Line.SecondPoint = new Point(e.X, e.Y);
+                DrawBox.Refresh();
+            }
+        }
+
+        private void DrawBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            Drawing = false;
+        }
+        #endregion
     }
 }
