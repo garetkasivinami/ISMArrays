@@ -17,11 +17,12 @@ namespace OOPDraw
         private Graphics graphics;
         private Pen pen;
         public ShapePoint[] ShapePoints;
+        public Thread CleanThread;
         public Form1()
         {
             InitializeComponent();
             random = new Random();
-
+            new Thread(Cleaner).Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,7 +34,7 @@ namespace OOPDraw
 
         private void CreateDraw_Click(object sender, EventArgs e)
         {
-            ShapePoints = new ShapePoint[3];
+            ShapePoints = new ShapePoint[Count.Value];
 
             for (int i = 0; i < ShapePoints.Length; i++)
             {
@@ -54,7 +55,6 @@ namespace OOPDraw
                         break;
                 }
             }
-            GC.Collect();
             Draw(); // DrawBox>Reflesh() не працює як потрібно 
         }
         private void ClearButton_Click(object sender, EventArgs e)
@@ -70,6 +70,8 @@ namespace OOPDraw
         // костиль
         public void Draw()
         {
+            graphics.Dispose();
+            graphics = DrawBox.CreateGraphics();
             graphics.Clear(Color.White);
             if (ShapePoints != null)
             {
@@ -77,6 +79,19 @@ namespace OOPDraw
                 {
                     ShapePoints[i].Draw(graphics);
                 }
+            }
+        }
+
+        private void Count_Scroll(object sender, EventArgs e)
+        {
+            CountLabel.Text = Count.Value.ToString();
+        }
+        private void Cleaner()
+        {
+            while (true)
+            {
+                Thread.Sleep(5000);
+                GC.Collect();
             }
         }
     }

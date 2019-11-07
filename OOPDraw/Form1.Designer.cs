@@ -31,11 +31,15 @@
             this.CreateDraw = new System.Windows.Forms.Button();
             this.DrawBox = new System.Windows.Forms.PictureBox();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.Count = new System.Windows.Forms.TrackBar();
+            this.CountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DrawBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Count)).BeginInit();
             this.SuspendLayout();
             // 
             // CreateDraw
             // 
+            this.CreateDraw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CreateDraw.Location = new System.Drawing.Point(29, 606);
             this.CreateDraw.Name = "CreateDraw";
             this.CreateDraw.Size = new System.Drawing.Size(75, 23);
@@ -46,6 +50,9 @@
             // 
             // DrawBox
             // 
+            this.DrawBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DrawBox.Location = new System.Drawing.Point(12, 3);
             this.DrawBox.Name = "DrawBox";
             this.DrawBox.Size = new System.Drawing.Size(1081, 597);
@@ -55,7 +62,8 @@
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(805, 606);
+            this.ClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClearButton.Location = new System.Drawing.Point(1006, 606);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(75, 23);
             this.ClearButton.TabIndex = 2;
@@ -63,11 +71,35 @@
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
+            // Count
+            // 
+            this.Count.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Count.Location = new System.Drawing.Point(110, 606);
+            this.Count.Maximum = 100;
+            this.Count.Minimum = 1;
+            this.Count.Name = "Count";
+            this.Count.Size = new System.Drawing.Size(809, 56);
+            this.Count.TabIndex = 3;
+            this.Count.Value = 1;
+            this.Count.Scroll += new System.EventHandler(this.Count_Scroll);
+            // 
+            // CountLabel
+            // 
+            this.CountLabel.AutoSize = true;
+            this.CountLabel.Location = new System.Drawing.Point(926, 612);
+            this.CountLabel.Name = "CountLabel";
+            this.CountLabel.Size = new System.Drawing.Size(16, 17);
+            this.CountLabel.TabIndex = 4;
+            this.CountLabel.Text = "1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1093, 641);
+            this.Controls.Add(this.CountLabel);
+            this.Controls.Add(this.Count);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.CreateDraw);
             this.Controls.Add(this.DrawBox);
@@ -75,7 +107,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DrawBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Count)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -84,6 +118,8 @@
         private System.Windows.Forms.Button CreateDraw;
         private System.Windows.Forms.PictureBox DrawBox;
         private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.TrackBar Count;
+        private System.Windows.Forms.Label CountLabel;
     }
 }
 
