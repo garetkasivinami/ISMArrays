@@ -12,5 +12,10 @@ namespace OOPDraw
         {
             graphics.DrawRectangle(Pen, MainPoint.X - SecondPoint.X / 2, MainPoint.Y - SecondPoint.Y, SecondPoint.X, SecondPoint.Y);
         }
+        public override void Move(Point delta)
+        {
+            MainPoint.X += delta.X;
+            MainPoint.Y += delta.X;
+        }
     }
 }

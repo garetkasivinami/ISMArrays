@@ -13,5 +13,11 @@ namespace OOPDraw
         {
             graphics.DrawLine(Pen, MainPoint, SecondPoint);
         }
+        public override void Move(Point delta)
+        {
+            base.Move(delta);
+            SecondPoint.X += delta.X;
+            SecondPoint.Y += delta.Y;
+        }
     }
 }

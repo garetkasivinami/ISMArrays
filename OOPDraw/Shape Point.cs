@@ -17,5 +17,10 @@ namespace OOPDraw
             MainPoint = mainPoint;
         }
         public abstract void Draw(Graphics graphics);
+        public abstract void Move(Point delta);
+        public void Move(int deltaX, int deltaY) 
+        {
+            Move(new Point(deltaX,deltaY));
+        }
     }
 }

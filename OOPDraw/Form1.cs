@@ -24,21 +24,26 @@ namespace OOPDraw
         {
             InitializeComponent();
             random = new Random();
-            new Thread(Cleaner).Start();
+            CleanThread = new Thread(Cleaner);
+            CleanThread.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             graphics = DrawBox.CreateGraphics();
             pen = new Pen(Color.Red, 2);
-            graphics.Clear(Color.White); // не працює
+            graphics.Clear(Color.White);
         }
 
         private void CreateDraw_Click(object sender, EventArgs e)
         {
             ShapePoints.Clear();
-
-            for (int i = 0; i < Count.Value; i++)
+            DrawRandomShapes(Count.Value);
+            DrawBox.Refresh();
+        }
+        private void DrawRandomShapes(int count)
+        {
+            for (int i = 0; i < count; i++)
             {
                 pen.Color = Color.FromArgb(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
                 switch (random.Next(0, 4))
@@ -57,7 +62,6 @@ namespace OOPDraw
                         break;
                 }
             }
-            DrawBox.Refresh();
         }
         private void ClearButton_Click(object sender, EventArgs e)
         {
@@ -67,7 +71,6 @@ namespace OOPDraw
 
         private void DrawBox_Paint(object sender, PaintEventArgs e)
         {
-            pen.Color = Color.Red;
             graphics = e.Graphics;
             graphics.Clear(Color.White);
             if (ShapePoints.Count > 0)
@@ -93,10 +96,17 @@ namespace OOPDraw
         #region Малювання мишкою
         private void DrawBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Drawing = true;
-            Point startMousePos = new Point(e.X, e.Y);
-            Line = new DrawLine(pen.Color, startMousePos, startMousePos, pen.Width);
-            ShapePoints.Add(Line);
+            if (e.Button == MouseButtons.Left)
+            {
+                Drawing = true;
+                Point startMousePos = new Point(e.X, e.Y);
+                Line = new DrawLine(pen.Color, startMousePos, startMousePos, pen.Width);
+                ShapePoints.Add(Line);
+            } else if (e.Button == MouseButtons.Right)
+            {
+                GetColor.ShowDialog();
+                pen.Color = GetColor.Color;
+            }
         }
 
         private void DrawBox_MouseMove(object sender, MouseEventArgs e)

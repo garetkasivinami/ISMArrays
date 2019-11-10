@@ -16,5 +16,10 @@ namespace OOPDraw
         {
             graphics.DrawEllipse(Pen, MainPoint.X, MainPoint.Y, 3, 3);
         }
+        public override void Move(Point delta)
+        {
+            MainPoint.X += delta.X;
+            MainPoint.Y += delta.Y;
+        }
     }
 }

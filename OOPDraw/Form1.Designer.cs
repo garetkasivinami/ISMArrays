@@ -33,6 +33,7 @@
             this.ClearButton = new System.Windows.Forms.Button();
             this.Count = new System.Windows.Forms.TrackBar();
             this.CountLabel = new System.Windows.Forms.Label();
+            this.GetColor = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.DrawBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Count)).BeginInit();
             this.SuspendLayout();
@@ -97,6 +98,10 @@
             this.CountLabel.TabIndex = 4;
             this.CountLabel.Text = "1";
             // 
+            // GetColor
+            // 
+            this.GetColor.Color = System.Drawing.Color.Red;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -124,6 +129,7 @@
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.TrackBar Count;
         private System.Windows.Forms.Label CountLabel;
+        private System.Windows.Forms.ColorDialog GetColor;
     }
 }
 
